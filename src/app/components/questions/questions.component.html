@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{question.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{question.description}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <div> <br>
+
+        <div>
+            <form [formGroup]="questionForm">
+                <!-- {{questionForm.value | json}}
+                {{questionForm.value.basisType |json}} -->
+                <!-- Category -->
+                <mat-form-field appearance="fill" id="title t1">
+                    <mat-label for="detailCategory">Basis of Accounting</mat-label>
+                    <div>
+                        <mat-select formControlName="basisType" [(ngModel)]="defaultBasis">
+                            <mat-option *ngFor="let type of answerType" [value]="type" name="basis"
+                                default="defaultBasis">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </mat-form-field>
+
+                <app-question-row *ngFor="let answerRow of question.correct_answers" [answerRow]="answerRow"
+                    [basisType]="questionForm.value.basisType" (onSubmitAnswer)="submitAnswer($event)">
+                </app-question-row>
+
+
+
+            </form>
+        </div>
+
+    </div>
+</mat-card>

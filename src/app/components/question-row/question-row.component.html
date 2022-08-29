@@ -1,0 +1,53 @@
+<div *ngIf="basisType.toLowerCase() == answerRow.type">
+    <form [formGroup]="rowGroup" (ngSubmit)="onSubmit()">
+        <ng-container formArrayName="inputRow">
+            <div *ngFor="let row of inputRow.controls ;let i=index">
+                <ng-container [formGroupName]="i">
+                    <!-- Date -->
+                    <mat-form-field appearance="fill" id="title t2">
+                        <mat-label for="inputDate">Date</mat-label>
+                        <div>
+                            <input matInput formControlName="when" name="inputDate" id="inputDate" placeholder="MM/DD">
+                        </div>
+                    </mat-form-field>
+
+                    <!-- Category -->
+                    <mat-form-field appearance="fill" id="title t1">
+                        <mat-label for="entryType">Entry</mat-label>
+                        <div>
+                            <mat-select formControlName="type">
+                                <mat-option *ngFor="let category of categoryList" [value]="category">
+                                    {{category}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </mat-form-field>
+
+                    <!-- Debit -->
+                    <mat-form-field appearance="fill" id="title t2">
+                        <mat-label for="debitAmount">Debit (DR)</mat-label>
+                        <div>
+                            <input type="number" matInput formControlName="Dr" name="debit" id="debit">
+                        </div>
+                    </mat-form-field>
+
+                    <!-- Credit -->
+                    <mat-form-field appearance="fill" id="title t2">
+                        <mat-label for="creditAmount">Credit (CR)</mat-label>
+                        <div>
+                            <input type="number" matInput formControlName="Cr" name="credit" id="credit">
+                        </div>
+                    </mat-form-field>
+                </ng-container>
+
+            </div>
+        </ng-container>
+
+
+
+
+        <button class="btn" mat-raised-button color="primary">Check Answer</button>
+
+    </form>
+
+</div>

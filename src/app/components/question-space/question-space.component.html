@@ -1,0 +1,16 @@
+<!-- <app-questions *ngFor="let question of this.questionList" [question]="question"></app-questions> -->
+
+<mat-stepper #stepper *ngIf="this.questionList">
+    <mat-step *ngFor="let question of this.questionList" [stepControl]="question">
+        <div>
+            <ng-template matStepLabel> {{question.title}}
+            </ng-template>
+
+            <app-questions [question]="question"></app-questions>
+
+        </div>
+
+    </mat-step>
+</mat-stepper>
+
+<div *ngIf="!this.questionList">No question found...</div>
