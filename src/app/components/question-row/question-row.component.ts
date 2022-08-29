@@ -22,30 +22,6 @@ export class QuestionRowComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
-
-    // this.rowGroup = new FormGroup({
-    //   rowInputs: this.fb.array(
-    //     [{ 'inputDate': new FormControl(null) },
-    //     { 'entryType': new FormControl(null) },
-    //     { 'debitAmount': new FormControl(null) },
-    //     { 'creditAmount': new FormControl(null) }])
-    // })
-
-
-    // this.rowGroup = this.fb.group(
-    //   {
-    //     inputRow: this.fb.array([])
-    //   }
-
-    //   // this.fb.array([{
-    //   //   'inputDate': new FormControl(null),
-    //   //   'entryType': new FormControl(null),
-    //   //   'debitAmount': new FormControl(null),
-    //   //   'creditAmount': new FormControl(null),
-    //   // }])
-    // )
-
     this.addInputRow()
   }
 
@@ -59,9 +35,6 @@ export class QuestionRowComponent implements OnInit {
 
 
 
-    inputRow: this.fb.array([])
-
-
     for (let i of this.answerRow.entries) {
       this.inputRow.push(this.fb.group({
         when: this.fb.control(null, [Validators.required, Validators.pattern('^[0-9]+/[0-9]{2}$')]),
@@ -70,25 +43,8 @@ export class QuestionRowComponent implements OnInit {
         Cr: this.fb.control(null),
       }))
 
-      console.log("added" + JSON.stringify(i))
-      console.log(this.inputRow.value)
     }
 
-    console.log(this.inputRow.controls)
-
-    // if (this.basisType == this.answerRow.type && this.title == this.formTitle) {
-    //   console.log(JSON.stringify(this.answerRow.type))
-    //   for (let i of this.answerRow.entries) {
-    //     this.inputRow.push(this.fb.group({
-    //       inputDate: [],
-    //       entryType: [],
-    //       debitAmount: [],
-    //       creditAmount: [],
-    //     }))
-
-    //     console.log("added" + JSON.stringify(i))
-    //   }
-    // }
 
 
   }
@@ -97,7 +53,7 @@ export class QuestionRowComponent implements OnInit {
 
 
   onSubmit() {
-    console.log("before trimming" + JSON.stringify(this.rowGroup.value.inputRow))
+
     //Remove key with null value
     for (let i of this.rowGroup.value.inputRow) {
       Object.keys(i).forEach(key => {
@@ -107,7 +63,6 @@ export class QuestionRowComponent implements OnInit {
       });
     }
 
-    console.log("after trimming" + JSON.stringify(this.rowGroup.value.inputRow))
     this.onSubmitAnswer.emit(this.rowGroup.value.inputRow)
   }
 

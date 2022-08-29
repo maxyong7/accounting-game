@@ -23,7 +23,6 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.TaskService.getQuestions().subscribe((value) => this.questionList = value)
     this.defaultBasis = this.answerType[0]
     this.questionForm = new FormGroup({
       'basisType': new FormControl(this.defaultBasis)
@@ -37,7 +36,6 @@ export class QuestionsComponent implements OnInit {
 
     const map = {};
     let correctAnswer = this.answerTypeCheck(this.defaultBasis.toLowerCase())
-
 
     correctAnswer.sort((a: any, b: any) => (a.when.localeCompare(b.when) || a.type.localeCompare(b.type)))
 
